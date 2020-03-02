@@ -16,6 +16,7 @@ function App() {
       <header className="App-header">
         BW-Kids-Fly-2
       </header>
+      <AddTrip/>
       <Switch>
         <Route exact path="/authorization-register" component={ButtonRegister}/>
         <Route exact path="/authorization-login" component={ButtonLogin}/>

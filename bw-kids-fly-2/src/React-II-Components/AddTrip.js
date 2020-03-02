@@ -46,7 +46,7 @@ const AddTrip = props => {
           onChange={handleChange}
         />
         <br />
-        <label>How many kids are travelling with you?</label>
+        <label>How many children are travelling with you?</label>
         <br />
         <input
           type="number"
@@ -55,7 +55,7 @@ const AddTrip = props => {
           onChange={handleChange}
         />
         <br />
-        <label>How many checked bags you'll be having?</label>
+        <label>How many checked bags will you have?</label>
         <br />
         <input
           type="number"
@@ -64,7 +64,8 @@ const AddTrip = props => {
           onChange={handleChange}
         />
         <br />
-        <label>How many carryon bags?</label>
+        <label>How many carry-on bags?</label>
+        <br />
         <input
           type="number"
           name="carryon_bags"
@@ -72,7 +73,7 @@ const AddTrip = props => {
           onChange={handleChange}
         />
         <br />
-        <label>Carseats needed</label>
+        <label>How many carseats needed?</label>
         <br />
         <input
           type="number"
@@ -81,7 +82,7 @@ const AddTrip = props => {
           onChange={handleChange}
         />
         <br />
-        <label>Strollers needed</label>
+        <label>How many strollers needed?</label>
         <br />
         <input
           type="number"

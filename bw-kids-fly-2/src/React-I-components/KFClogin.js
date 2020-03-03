@@ -136,6 +136,7 @@ const Kfcsignin = ({ values, touched, errors, status, ...props }) => {
             value={user.email}
             onChange={handleChanges} />
             {touched.email && errors.email && <p className="errors">{errors.email}</p>}
+            
             <label> Password: </label>
             <Field 
             type="password" 

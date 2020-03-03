@@ -130,11 +130,11 @@ const SignUpForms = ({ values, touched, errors, status, ...props }) => {
 
             <label> First Name: </label>
             <Field type="text" name="first_name" placeholder="Enter First Name" value={user.first_name} onChange={handleChanges}/>
-            {touched.name && errors.name && <p className="errors">{errors.name}</p>}
+            {touched.first_name && errors.first_name && <p className="errors">{errors.first_name}</p>}
           
             <label> Last Name: </label>
             <Field type="text" name="last_name" placeholder="Enter Last Name" value={user.last_name} onChange={handleChanges}/>
-            {touched.name && errors.lastname && <p className="errors">{errors.lastname}</p>}
+            {touched.last_name && errors.last_name && <p className="errors">{errors.last_name}</p>}
 
             <label> Email: </label>
             <Field type="email" name="email" placeholder="Enter Email" value={user.email} onChange={handleChanges} />
@@ -150,7 +150,7 @@ const SignUpForms = ({ values, touched, errors, status, ...props }) => {
 
             <label>Home Airport: </label>
             <Field type="text" name="a_home_airport" placeholder="Enter Home Airport" value={user.a_home_airport} onChange={handleChanges} />
-            {touched.airport && errors.airport && <p className="errors">{errors.airport}</p>}
+            {touched.a_home_airport && errors.a_home_airport && <p className="errors">{errors.a_home_airport}</p>}
 
             <button type="submit" disabled={values.isSubmitting}>
               {values.isSubmitting ? 'Submitting' : 'Submit'}

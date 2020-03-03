@@ -5,10 +5,11 @@ import Homepage from './React-I-components/Homepage';
 import SignUpForms from './React-I-components/KFCSignUp';
 import Kfcsignin from './React-I-components/KFClogin';
 import './App.css';
-import { Route } from 'react-router-dom';
+import { Route, Router } from 'react-router-dom';
 
 function App() {
   return (
+    <Router>
     <div className="App">
       <Homepage />
       <Route path="/parent-registration" component={Forms} />
@@ -17,6 +18,7 @@ function App() {
       <Route path="/kfc-register" component={SignUpForms} />
       <Route path="/kfc-signin" component={Kfcsignin} />
     </div>
+    </Router>
   );
 }
 

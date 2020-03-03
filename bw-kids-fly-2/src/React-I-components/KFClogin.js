@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {loginAssistant} from '../actions/Login';
@@ -136,7 +135,7 @@ const Kfcsignin = ({ values, touched, errors, status, ...props }) => {
             value={user.email}
             onChange={handleChanges} />
             {touched.email && errors.email && <p className="errors">{errors.email}</p>}
-            
+
             <label> Password: </label>
             <Field 
             type="password" 

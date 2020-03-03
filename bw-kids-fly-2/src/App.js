@@ -5,7 +5,7 @@ import Homepage from './React-I-components/Homepage';
 import SignUpForms from './React-I-components/KFCSignUp';
 import Kfcsignin from './React-I-components/KFClogin';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ParentProfile from "./React-II-Components/ParentProfile";
 import AddTrip from "./React-II-Components/AddTrip";
 import AssistantProfile from "./React-II-Components/AssistantProfile";

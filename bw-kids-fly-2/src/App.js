@@ -5,7 +5,7 @@ import Homepage from './React-I-components/Homepage';
 import SignUpForms from './React-I-components/KFCSignUp';
 import Kfcsignin from './React-I-components/KFClogin';
 import './App.css';
-import { Router } from 'react-router-dom';
+import { Route, Router } from 'react-router-dom';
 
 function App() {
   return (

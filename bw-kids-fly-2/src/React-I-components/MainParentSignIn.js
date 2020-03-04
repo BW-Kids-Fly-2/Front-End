@@ -1,76 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { loginParent } from '../actions/Login';
 
-const ParentSignIn = ({ values, touched, errors, status }) => {
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    status && setUser(status);
-  }, [status]);
-
-  return (
-    <FormContainer>
-      <div className="userinfo">
-        <h3> Welcome to KidsFly{user.name} ! </h3>
-      </div>
-      <div className="container">
-        <h1>Sign-In</h1>
-        <div className="signup">
-          <Form>
-            <label> Email: </label>
-            <Field type="email" name="email" placeholder="Enter Email" />
-            {touched.email && errors.email && <p className="errors">{errors.email}</p>}
-            <label> Password: </label>
-            <Field type="password" name="password" placeholder="Enter Password" />
-            {touched.password && errors.password && <p className="errors">{errors.password}</p>}
-
-            <button type="submit" disabled={values.isSubmitting}>
-              {values.isSubmitting ? 'Submitting' : 'Submit'}
-            </button>
-          </Form>
-        </div>
-      </div>
-    </FormContainer>
-  );
-};
-
-export default withFormik({
-  mapPropsToValues: props => ({
-    name: '',
-    email: '',
-    password: '',
-    TermsOfService: false,
-  }),
-  validationSchema: Yup.object().shape({
-    name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(20, 'Too Long!')
-      .required('Name is Required!'),
-    email: Yup.string()
-      .min(3, 'Too Short!')
-      .max(20, 'Too Long!')
-      .email('Invalid email')
-      .required('Email is Required!'),
-    password: Yup.string()
-      .min(8, 'Too Short!')
-      .max(20, 'Too Long!')
-      .required('Password is Required'),
-  }),
-  handleSubmit: (values, { resetForm, setStatus }) => {
-    axios
-      .post('https://kids-fly-2.herokuapp.com/api/auth/login-parent', values)
-      .then(response => {
-        console.log('value', values);
-        resetForm();
-        setStatus(response.data);
-      })
-      .catch(err => console.log(err.response));
-  },
-})(ParentSignIn);
-
+//Styled-Components
 const FormContainer = styled.div`
   width: 100%;
   display: flex;
@@ -157,3 +92,74 @@ const FormContainer = styled.div`
     }
   }
 `;
+
+const ParentSignIn = ({ values, touched, errors, status, ...props }) => {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.loginParent(user).then(() => console.log('YAY, LOGGED IN!!!'), props.history.push('/parent'));
+    setUser({
+      email: '',
+      password: '',
+    });
+  };
+  const handleChanges = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  return (
+    <FormContainer>
+      <div className="userinfo">
+        <h3> Welcome to KidsFly{user.name} ! </h3>
+      </div>
+      <div className="container">
+        <h1>Sign-In</h1>
+        <div className="signup">
+          <Form onSubmit={handleSubmit}>
+            <label> Email: </label>
+            <Field type="email" name="email" placeholder="Enter Email" value={user.email} onChange={handleChanges} />
+            {touched.email && errors.email && <p className="errors">{errors.email}</p>}
+            <label> Password: </label>
+            <Field
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              value={user.password}
+              onChange={handleChanges}
+            />
+            {touched.password && errors.password && <p className="errors">{errors.password}</p>}
+
+            <button type="submit" disabled={values.isSubmitting}>
+              {values.isSubmitting ? 'Submitting' : 'Submit'}
+            </button>
+          </Form>
+        </div>
+      </div>
+    </FormContainer>
+  );
+};
+
+const FormikLogIn = withFormik({
+  mapPropsToValues({ username, password }) {
+    return {
+      username: username || '',
+      password: password || '',
+    };
+  },
+  validationSchema: Yup.object().shape({
+    email: Yup.string()
+      .min(3, 'Too Short!')
+      .max(20, 'Too Long!')
+      .email('Invalid email')
+      .required('Email is Required!'),
+    password: Yup.string()
+      .min(8, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Password is Required'),
+  }),
+})(ParentSignIn);
+
+export default connect(null, { loginParent })(FormikLogIn);

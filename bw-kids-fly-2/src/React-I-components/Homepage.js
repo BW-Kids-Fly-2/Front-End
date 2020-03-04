@@ -10,10 +10,10 @@ function Homepage() {
 
         <nav className="user-cp">
           <Link to="/">Home</Link>
-          <Link to="/parent-signin">Sign In</Link>
-          <Link to="/parent-registration">Register</Link>
-          <Link to="/kfc-register"> Assistant Sign Up</Link>
-          <Link to="kfc-signin">Assistant Login</Link>
+          <Link to="/parent-signin">Parent Sign In</Link>
+          <Link to="/parent-registration">Parent Sign Up</Link>
+          <Link to="/kfc-register"> KFC Sign Up</Link>
+          <Link to="/KFClogin">KFC Login</Link>
         </nav>
       </Container>
     </div>

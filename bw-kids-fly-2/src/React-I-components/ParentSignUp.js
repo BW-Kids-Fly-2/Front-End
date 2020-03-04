@@ -1,100 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import {connect} from 'react-redux';
+import {addUser} from '../actions/Register';
 import styled from 'styled-components';
 
-const Forms = ({ values, touched, errors, status }) => {
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    status && setUser(status);
-  }, [status]);
-
-  return (
-    <div className="container">
-      <FormContainer>
-        <div className="signup">
-          <div className="userinfo">
-            <h3> Welcome to KidsFly {user.name} ! </h3>
-          </div>
-          <Form>
-            <label> First Name: </label>
-            <Field type="text" name="name" placeholder="Enter First Name" />
-            {touched.name && errors.name && <p className="errors">{errors.name}</p>}
-            <label> Last Name: </label>
-            <Field type="text" name="lastname" placeholder="Enter Last Name" />
-            {touched.name && errors.lastname && <p className="errors">{errors.lastname}</p>}
-
-            <label> Email: </label>
-            <Field type="email" name="email" placeholder="Enter Email" />
-            {touched.email && errors.email && <p className="errors">{errors.email}</p>}
-            <label> Password: </label>
-            <Field type="password" name="password" placeholder="Enter Password" />
-            {touched.password && errors.password && <p className="errors">{errors.password}</p>}
-            <label>Address: </label>
-            <Field type="text" name="address" placeholder="Enter Address" />
-            {touched.address && errors.address && <p className="errors">{errors.address}</p>}
-            <label>Home Airport: </label>
-            <Field type="text" name="airport" placeholder="Enter Home Airport" />
-            {touched.airport && errors.airport && <p className="errors">{errors.airport}</p>}
-            <button type="submit" disabled={values.isSubmitting}>
-              {values.isSubmitting ? 'Submitting' : 'Submit'}
-            </button>
-          </Form>
-        </div>
-      </FormContainer>
-    </div>
-  );
-};
-
-export default withFormik({
-  mapPropsToValues: props => ({
-    name: '',
-    email: '',
-    password: '',
-    TermsOfService: false,
-  }),
-  validationSchema: Yup.object().shape({
-    name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(20, 'Too Long!')
-      .required('Name is Required!'),
-    lastname: Yup.string()
-      .min(2, 'Too Short!')
-      .max(20, 'Too Long!')
-      .required('Name is Required!'),
-
-    email: Yup.string()
-      .min(3, 'Too Short!')
-      .max(20, 'Too Long!')
-      .email('Invalid email')
-      .required('Email is Required!'),
-    password: Yup.string()
-      .min(8, 'Too Short!')
-      .max(20, 'Too Long!')
-      .required('Password is Required'),
-    address: Yup.string()
-      .min(2, 'Invalid Address!')
-      .max(40, 'Invalid Address!')
-      .required('Address is Required!'),
-    airport: Yup.string()
-      .min(2, 'Invalid Aiport!')
-      .max(40, 'Invalid Airport!')
-      .required('Airport is Required!'),
-  }),
-  handleSubmit: (values, { resetForm, setStatus }) => {
-    axios
-      .post('https://kids-fly-2.herokuapp.com/api/auth/register-parent', values)
-      .then(response => {
-        console.log('value', values);
-        resetForm();
-        setStatus(response.data);
-      })
-      .catch(err => console.log(err.response));
-  },
-})(Forms);
-
+//Styled-Components
 const FormContainer = styled.div`
   width: 100%;
   display: flex;
@@ -181,3 +92,116 @@ const FormContainer = styled.div`
     }
   }
 `;
+
+
+const Forms = ({ values, touched, errors, status, ...props }) => {
+  const [user, setUser] = useState({
+    first_name:'',
+    last_name:'',
+    email:'',
+    password: '',
+    address:'', 
+    phone:'',
+    p_home_airport:''
+  });
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.addUser(user)
+    .then(() => props.history.push('/parent'));
+    setUser({
+      username:'',
+      password: ''
+    })
+  }
+
+  const handleChanges = e => {
+    setUser({...user, [e.target.name]: e.target.value});
+}
+  return (
+    <div className="container">
+      <FormContainer>
+        <div className="signup">
+          <div className="userinfo">
+            <h3> Welcome to KidsFly {user.name} ! </h3>
+          </div>
+          <Form onSubmit={handleSubmit}>
+            <label> First Name: </label>
+            <Field type="text" name="first_name" placeholder="Enter First Name" onChange={handleChanges}
+              value={user.first_name}/>
+            {touched.first_name && errors.first_name && <p className="errors">{errors.first_name}</p>}
+
+            <label> Last Name: </label>
+            <Field type="text" name="last_name" placeholder="Enter Last Name" onChange={handleChanges}
+              value={user.last_name}/>
+            {touched.last_name && errors.last_name && <p className="errors">{errors.last_name}</p>}
+
+            <label> Email: </label>
+            <Field type="email" name="email" placeholder="Enter Email" value={user.email} onChange={handleChanges}/>
+            {touched.email && errors.email && <p className="errors">{errors.email}</p>}
+
+            <label> Password: </label>
+            <Field type="password" name="password" placeholder="Enter Password"  value={user.password} onChange={handleChanges}/>
+            {touched.password && errors.password && <p className="errors">{errors.password}</p>}
+
+            <label>Address: </label>
+            <Field type="text" name="address" placeholder="Enter Address" value={user.address} onChange={handleChanges}/>
+            {touched.address && errors.address && <p className="errors">{errors.address}</p>}
+
+            <label> Phone Number: </label>
+            <Field type="tel" name="phone" placeholder="Enter Phone Number"  value={user.phone} onChange={handleChanges}/>
+            {touched.phone && errors.phone && <p className="errors">{errors.phone}</p>}
+
+            <label>Home Airport: </label>
+            <Field type="text" name="p_home_airport" placeholder="Enter Home Airport" value={user.p_home_airport} onChange={handleChanges}
+/>
+            {touched.p_home_airport && errors.p_home_airport && <p className="errors">{errors.p_home_airport}</p>}
+
+            <button type="submit" disabled={values.isSubmitting}>
+              {values.isSubmitting ? 'Submitting' : 'Submit'}
+            </button>
+          </Form>
+        </div>
+      </FormContainer>
+    </div>
+  );
+};
+
+const FormikSignUp = withFormik({
+  
+  validationSchema: Yup.object().shape({
+    firstname: Yup.string()
+      .min(2, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Name is Required!'),
+    lastname: Yup.string()
+      .min(2, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Name is Required!'),
+
+    email: Yup.string()
+      .min(3, 'Too Short!')
+      .max(20, 'Too Long!')
+      .email('Invalid email')
+      .required('Email is Required!'),
+    password: Yup.string()
+      .min(8, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Password is Required'),
+    address: Yup.string()
+      .min(2, 'Invalid Address!')
+      .max(40, 'Invalid Address!')
+      .required('Address is Required!'),
+    phone: Yup.string().min(10, "Please enter your ten digit phone number.").required("Please enter your ten digit phone number."),
+    airport: Yup.string()
+      .min(2, 'Invalid Aiport!')
+      .max(40, 'Invalid Airport!')
+      .required('Airport is Required!'),
+  })
+})(Forms)
+
+export default connect(
+  null,
+  {addUser}
+)(FormikSignUp);
+

@@ -22,7 +22,7 @@ const SignUpForms = ({ values, touched, errors, status }) => {
             <label> First Name: </label>
             <Field type="text" name="name" placeholder="Enter First Name" />
             {touched.name && errors.name && <p className="errors">{errors.name}</p>}
-            <label> Last Name: </label>
+
             <label> Last Name: </label>
             <Field type="text" name="lastname" placeholder="Enter Last Name" />
             {touched.name && errors.lastname && <p className="errors">{errors.lastname}</p>}

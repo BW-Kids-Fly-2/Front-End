@@ -20,10 +20,6 @@ const ParentSignIn = ({ values, touched, errors, status }) => {
         <h1>Sign-In</h1>
         <div className="signup">
           <Form>
-            <label> First Name: </label>
-            <Field type="text" name="name" placeholder="Enter First Name" />
-            {touched.name && errors.name && <p className="errors">{errors.name}</p>}
-
             <label> Email: </label>
             <Field type="email" name="email" placeholder="Enter Email" />
             {touched.email && errors.email && <p className="errors">{errors.email}</p>}

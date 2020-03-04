@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import logo from './img/logo.png';
 function Homepage() {
   return (
     <div className="homepage">
       <Container>
-        {/* <h1>KidsFly</h1> */}
-
+        <img src={logo} alt="logo" style={{ width: '240px', height: '60px', marginLeft: '20px' }} />
         <nav className="user-cp">
-          <Link to="/">Home</Link>
+          {/* <Link to="/">Home</Link> */}
           <Link to="/parent-signin"> Sign In</Link>
           <Link to="/parent-registration"> Sign Up</Link>
           <Link to="/kfc-register"> Assistant Sign Up</Link>

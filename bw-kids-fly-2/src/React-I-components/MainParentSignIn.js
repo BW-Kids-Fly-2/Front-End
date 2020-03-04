@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {loginParent} from '../actions/Login';

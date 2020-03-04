@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import {connect} from 'react-redux';
 import {addUser} from '../actions/Register';
 import styled from 'styled-components';
@@ -149,7 +148,7 @@ const Forms = ({ values, touched, errors, status, ...props }) => {
             <Field type="text" name="address" placeholder="Enter Address" value={user.address} onChange={handleChanges}/>
             {touched.address && errors.address && <p className="errors">{errors.address}</p>}
 
-            <label> Password: </label>
+            <label> Phone Number: </label>
             <Field type="tel" name="phone" placeholder="Enter Phone Number"  value={user.phone} onChange={handleChanges}/>
             {touched.phone && errors.phone && <p className="errors">{errors.phone}</p>}
 

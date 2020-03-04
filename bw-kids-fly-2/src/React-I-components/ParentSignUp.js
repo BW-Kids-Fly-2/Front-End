@@ -108,7 +108,7 @@ const Forms = ({ values, touched, errors, status, ...props }) => {
   const handleSubmit = e => {
     e.preventDefault();
     props.addUser(user)
-    .then(() => props.history.push('/parent'));
+    .then(() => props.history.push('/yarn start'));
     setUser({
       username:'',
       password: ''

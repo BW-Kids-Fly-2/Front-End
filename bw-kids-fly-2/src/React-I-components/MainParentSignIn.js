@@ -127,6 +127,7 @@ const ParentSignIn = ({ values, touched, errors, status, ...props }) => {
             <label> Email: </label>
             <Field type="email" name="email" placeholder="Enter Email"  value={user.email} onChange={handleChanges} />
             {touched.email && errors.email && <p className="errors">{errors.email}</p>}
+            
             <label> Password: </label>
             <Field type="password" name="password" placeholder="Enter Password" value={user.password} onChange={handleChanges}/>
             {touched.password && errors.password && <p className="errors">{errors.password}</p>}

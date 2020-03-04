@@ -131,6 +131,7 @@ const SignUpForms = ({ values, touched, errors, status, ...props }) => {
             <label> First Name: </label>
             <Field type="text" name="first_name" placeholder="Enter First Name" value={user.first_name} onChange={handleChanges}/>
             {touched.first_name && errors.first_name && <p className="errors">{errors.first_name}</p>}
+            
           
             <label> Last Name: </label>
             <Field type="text" name="last_name" placeholder="Enter Last Name" value={user.last_name} onChange={handleChanges}/>

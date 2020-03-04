@@ -45,6 +45,25 @@ const AddTrip = props => {
           value={trip.trip_name}
           onChange={handleChange}
         />
+
+        <label>Departure Airport</label>
+          <input
+            type='text'
+            className='form-control'
+            name='dep_airport'
+            placeholder='Enter departure airport'
+            value={trip.dep_airport}
+            onChange={handleChange}
+          />
+        <br />
+        <label>Arrival Airport</label>
+          <input
+            className='form-control'
+            name='arr_airport'
+            placeholder='Enter arriving airport'
+            value={trip.arr_airport}
+            onChange={handleChange}
+          />
         <br />
         <label>How many children are travelling with you?</label>
         <br />

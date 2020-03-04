@@ -24,10 +24,11 @@ export default Homepage;
 const Container = styled.header`
   width: 100%;
   height: 5rem;
-  background: #d82748;
+  background: #3f3957;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  border-bottom: solid 2px #d82748;
 
   /* navigation / user cp styling */
   nav.user-cp {

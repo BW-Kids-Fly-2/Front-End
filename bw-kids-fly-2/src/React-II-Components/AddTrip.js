@@ -91,14 +91,8 @@ const AddTrip = props => {
           onChange={handleChange}
         />
         <br />
-        <textarea
-          name="notes"
-          type="text"
-          value={trip.strollers}
-          onChange={handleChange}
-        >
-          Anything else we should know?
-        </textarea>
+        
+        <textarea name="notes">Anything else we should know?</textarea>
         <br />
         <button onClick={handleSubmit}>Submit</button>
       </form>

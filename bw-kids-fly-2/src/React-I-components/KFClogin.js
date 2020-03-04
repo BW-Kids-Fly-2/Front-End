@@ -94,7 +94,7 @@ const FormContainer = styled.div`
 `;
 
 
-const Kfcsignin = ({ values, touched, errors, status, ...props }) => {
+const KFClogin = ({ values, touched, errors, status, ...props }) => {
   const [user, setUser] = useState({
     email:'',
     password:''
@@ -173,7 +173,7 @@ const FormikLogIn = withFormik({
       .max(20, 'Too Long!')
       .required('Password is Required')
     }),
-  })(Kfcsignin)
+  })(KFClogin)
 
 
 export default connect(

@@ -148,7 +148,7 @@ const Forms = ({ values, touched, errors, status, ...props }) => {
             <Field type="text" name="address" placeholder="Enter Address" value={user.address} onChange={handleChanges}/>
             {touched.address && errors.address && <p className="errors">{errors.address}</p>}
 
-            <label> Password: </label>
+            <label> Phone Number: </label>
             <Field type="tel" name="phone" placeholder="Enter Phone Number"  value={user.phone} onChange={handleChanges}/>
             {touched.phone && errors.phone && <p className="errors">{errors.phone}</p>}
 

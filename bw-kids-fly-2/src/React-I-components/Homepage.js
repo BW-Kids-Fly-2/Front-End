@@ -14,7 +14,7 @@ function Homepage() {
           <Link to="/parent-signin">Parent Sign In</Link>
           <Link to="/parent-registration">Parent Sign Up</Link>
           <Link to="/kfc-register"> KFC Sign Up</Link>
-          <Link to="/kfc-signin">KFC Login</Link>
+          <Link to="/KFClogin">KFC Login</Link>
         </nav>
       </Container>
     </div>

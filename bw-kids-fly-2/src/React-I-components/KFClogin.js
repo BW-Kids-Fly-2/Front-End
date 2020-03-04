@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
-import {loginAssistant} from '../actions/Login';
+import { connect } from 'react-redux';
+import { loginAssistant } from '../actions/Login';
 
 //styled-components
 const FormContainer = styled.div`
@@ -63,7 +63,7 @@ const FormContainer = styled.div`
     margin: 0.5rem 0;
     width: 20rem;
     height: 3.5rem;
-    background: #bfbfbf;
+    background: white;
     border: none;
     border-radius: 0.3rem;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
@@ -79,7 +79,7 @@ const FormContainer = styled.div`
     width: 20rem;
     height: 3.5rem;
     margin: 1rem 0 0;
-    background: #d1ffd6;
+    background: #d82748;
     border: none;
     border-radius: 0.3rem;
     transition: all 100ms;
@@ -88,61 +88,51 @@ const FormContainer = styled.div`
     &:hover {
       transition: background 100ms;
       cursor: pointer;
-      background: #afdeb4;
+      background: #dc143c;
     }
   }
 `;
 
-
 const KFClogin = ({ values, touched, errors, status, ...props }) => {
   const [user, setUser] = useState({
-    email:'',
-    password:''
+    email: '',
+    password: '',
   });
 
   const handleSubmit = e => {
     e.preventDeafault();
-    props.loginAssistant(user)
-    .then(() => 
-    console.log('LOGGED IN!'),
-    props.history.push('/assistant')
-    );
+    props.loginAssistant(user).then(() => console.log('LOGGED IN!'), props.history.push('/assistant'));
     setUser({
-      email:'',
-      password:''
+      email: '',
+      password: '',
     });
   };
 
   const handleChanges = e => {
-    setUser({...user, [e.target.name]: e.target.value})
-  }
-  
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
     <FormContainer>
       <div className="userinfo">
-        <h3> Welcome to the KidsFlyConnection team {user.name} ! </h3>
+        <h3> Welcome to the Kids Fly Connection team {user.name} ! </h3>
       </div>
       <div className="container">
         <h1>Sign-In</h1>
         <div className="signup">
-
           <Form onSubmit={handleSubmit}>
             <label> Email: </label>
-            <Field 
-            type="email" 
-            name="email" 
-            placeholder="Enter Email"
-            value={user.email}
-            onChange={handleChanges} />
+            <Field type="email" name="email" placeholder="Enter Email" value={user.email} onChange={handleChanges} />
             {touched.email && errors.email && <p className="errors">{errors.email}</p>}
 
             <label> Password: </label>
-            <Field 
-            type="password" 
-            name="password" 
-            placeholder="Enter Password"
-            value={user.password}
-            onChange={handleChanges} />
+            <Field
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              value={user.password}
+              onChange={handleChanges}
+            />
             {touched.password && errors.password && <p className="errors">{errors.password}</p>}
 
             <button type="submit" disabled={values.isSubmitting}>
@@ -156,10 +146,10 @@ const KFClogin = ({ values, touched, errors, status, ...props }) => {
 };
 
 const FormikLogIn = withFormik({
-  mapPropsToValues({username,password}){
-    return{
-      username: username || "",
-      password: password || "",
+  mapPropsToValues({ username, password }) {
+    return {
+      username: username || '',
+      password: password || '',
     };
   },
   validationSchema: Yup.object().shape({
@@ -171,12 +161,8 @@ const FormikLogIn = withFormik({
     password: Yup.string()
       .min(8, 'Too Short!')
       .max(20, 'Too Long!')
-      .required('Password is Required')
-    }),
-  })(KFClogin)
+      .required('Password is Required'),
+  }),
+})(KFClogin);
 
-
-export default connect(
-  null,
-  { loginAssistant }
-)(FormikLogIn);
+export default connect(null, { loginAssistant })(FormikLogIn);

@@ -6,14 +6,14 @@ function Homepage() {
   return (
     <div className="homepage">
       <Container>
-        <h1>KidsFly</h1>
+        {/* <h1>KidsFly</h1> */}
 
         <nav className="user-cp">
           <Link to="/">Home</Link>
-          <Link to="/parent-signin">Parent Sign In</Link>
-          <Link to="/parent-registration">Parent Sign Up</Link>
-          <Link to="/kfc-register"> KFC Sign Up</Link>
-          <Link to="/KFClogin">KFC Login</Link>
+          <Link to="/parent-signin"> Sign In</Link>
+          <Link to="/parent-registration"> Sign Up</Link>
+          <Link to="/kfc-register"> Assistant Sign Up</Link>
+          <Link to="/KFClogin">Assistant Login</Link>
         </nav>
       </Container>
     </div>
@@ -25,7 +25,7 @@ export default Homepage;
 const Container = styled.header`
   width: 100%;
   height: 5rem;
-  background: #d1ffd6;
+  background: #d82748;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -44,7 +44,7 @@ const Container = styled.header`
     }
 
     a {
-      color: black;
+      color: #f6f5fa;
       text-decoration: none;
       font-size: 0.9rem;
       transition: all 300ms;
@@ -85,7 +85,7 @@ const Container = styled.header`
   }
 
   h1 {
-    color: #444444;
+    color: #f6f5fa;
     font-weight: 600;
     font-size: 2rem;
     margin-left: 15%;

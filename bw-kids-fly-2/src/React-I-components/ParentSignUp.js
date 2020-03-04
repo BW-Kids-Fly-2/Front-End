@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import {connect} from 'react-redux';
-import {addUser} from '../actions/Register';
+import { connect } from 'react-redux';
+import { addUser } from '../actions/Register';
 import styled from 'styled-components';
 
 //Styled-Components
@@ -63,7 +63,7 @@ const FormContainer = styled.div`
     margin: 0.5rem 0;
     width: 20rem;
     height: 3.5rem;
-    background: #bfbfbf;
+    background: white;
     border: none;
     border-radius: 0.3rem;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
@@ -79,7 +79,7 @@ const FormContainer = styled.div`
     width: 20rem;
     height: 3.5rem;
     margin: 1rem 0 0;
-    background: #d1ffd6;
+    background: #d82748;
     border: none;
     border-radius: 0.3rem;
     transition: all 100ms;
@@ -88,36 +88,34 @@ const FormContainer = styled.div`
     &:hover {
       transition: background 100ms;
       cursor: pointer;
-      background: #afdeb4;
+      background: #dc143c;
     }
   }
 `;
 
-
 const Forms = ({ values, touched, errors, status, ...props }) => {
   const [user, setUser] = useState({
-    first_name:'',
-    last_name:'',
-    email:'',
+    first_name: '',
+    last_name: '',
+    email: '',
     password: '',
-    address:'', 
-    phone:'',
-    p_home_airport:''
+    address: '',
+    phone: '',
+    p_home_airport: '',
   });
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.addUser(user)
-    .then(() => props.history.push('/parent'));
+    props.addUser(user).then(() => props.history.push('/parent'));
     setUser({
-      username:'',
-      password: ''
-    })
-  }
+      username: '',
+      password: '',
+    });
+  };
 
   const handleChanges = e => {
-    setUser({...user, [e.target.name]: e.target.value});
-}
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
   return (
     <div className="container">
       <FormContainer>
@@ -127,34 +125,67 @@ const Forms = ({ values, touched, errors, status, ...props }) => {
           </div>
           <Form onSubmit={handleSubmit}>
             <label> First Name: </label>
-            <Field type="text" name="first_name" placeholder="Enter First Name" onChange={handleChanges}
-              value={user.first_name}/>
+            <Field
+              type="text"
+              name="first_name"
+              placeholder="Enter First Name"
+              onChange={handleChanges}
+              value={user.first_name}
+            />
             {touched.first_name && errors.first_name && <p className="errors">{errors.first_name}</p>}
 
             <label> Last Name: </label>
-            <Field type="text" name="last_name" placeholder="Enter Last Name" onChange={handleChanges}
-              value={user.last_name}/>
+            <Field
+              type="text"
+              name="last_name"
+              placeholder="Enter Last Name"
+              onChange={handleChanges}
+              value={user.last_name}
+            />
             {touched.last_name && errors.last_name && <p className="errors">{errors.last_name}</p>}
 
             <label> Email: </label>
-            <Field type="email" name="email" placeholder="Enter Email" value={user.email} onChange={handleChanges}/>
+            <Field type="email" name="email" placeholder="Enter Email" value={user.email} onChange={handleChanges} />
             {touched.email && errors.email && <p className="errors">{errors.email}</p>}
 
             <label> Password: </label>
-            <Field type="password" name="password" placeholder="Enter Password"  value={user.password} onChange={handleChanges}/>
+            <Field
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              value={user.password}
+              onChange={handleChanges}
+            />
             {touched.password && errors.password && <p className="errors">{errors.password}</p>}
 
             <label>Address: </label>
-            <Field type="text" name="address" placeholder="Enter Address" value={user.address} onChange={handleChanges}/>
+            <Field
+              type="text"
+              name="address"
+              placeholder="Enter Address"
+              value={user.address}
+              onChange={handleChanges}
+            />
             {touched.address && errors.address && <p className="errors">{errors.address}</p>}
 
             <label> Phone Number: </label>
-            <Field type="tel" name="phone" placeholder="Enter Phone Number"  value={user.phone} onChange={handleChanges}/>
+            <Field
+              type="tel"
+              name="phone"
+              placeholder="Enter Phone Number"
+              value={user.phone}
+              onChange={handleChanges}
+            />
             {touched.phone && errors.phone && <p className="errors">{errors.phone}</p>}
 
             <label>Home Airport: </label>
-            <Field type="text" name="p_home_airport" placeholder="Enter Home Airport" value={user.p_home_airport} onChange={handleChanges}
-/>
+            <Field
+              type="text"
+              name="p_home_airport"
+              placeholder="Enter Home Airport"
+              value={user.p_home_airport}
+              onChange={handleChanges}
+            />
             {touched.p_home_airport && errors.p_home_airport && <p className="errors">{errors.p_home_airport}</p>}
 
             <button type="submit" disabled={values.isSubmitting}>
@@ -168,7 +199,6 @@ const Forms = ({ values, touched, errors, status, ...props }) => {
 };
 
 const FormikSignUp = withFormik({
-  
   validationSchema: Yup.object().shape({
     firstname: Yup.string()
       .min(2, 'Too Short!')
@@ -192,16 +222,14 @@ const FormikSignUp = withFormik({
       .min(2, 'Invalid Address!')
       .max(40, 'Invalid Address!')
       .required('Address is Required!'),
-    phone: Yup.string().min(10, "Please enter your ten digit phone number.").required("Please enter your ten digit phone number."),
+    phone: Yup.string()
+      .min(10, 'Please enter your ten digit phone number.')
+      .required('Please enter your ten digit phone number.'),
     airport: Yup.string()
       .min(2, 'Invalid Aiport!')
       .max(40, 'Invalid Airport!')
       .required('Airport is Required!'),
-  })
-})(Forms)
+  }),
+})(Forms);
 
-export default connect(
-  null,
-  {addUser}
-)(FormikSignUp);
-
+export default connect(null, { addUser })(FormikSignUp);

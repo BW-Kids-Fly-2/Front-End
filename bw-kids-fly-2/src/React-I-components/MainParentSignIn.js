@@ -63,7 +63,7 @@ const FormContainer = styled.div`
     margin: 0.5rem 0;
     width: 20rem;
     height: 3.5rem;
-    background: #bfbfbf;
+    background: white;
     border: none;
     border-radius: 0.3rem;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
@@ -79,7 +79,7 @@ const FormContainer = styled.div`
     width: 20rem;
     height: 3.5rem;
     margin: 1rem 0 0;
-    background: #d1ffd6;
+    background: #d82748;
     border: none;
     border-radius: 0.3rem;
     transition: all 100ms;
@@ -88,7 +88,7 @@ const FormContainer = styled.div`
     &:hover {
       transition: background 100ms;
       cursor: pointer;
-      background: #afdeb4;
+      background: #dc143c;
     }
   }
 `;
